@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Number Match Web</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>🧮 Number Match</h1>
+  <div id="game-board"></div>
+  <button onclick="resetGame()">🔄 リセット</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

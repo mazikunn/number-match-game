@@ -1,0 +1,46 @@
+let board = [];
+let selected = [];
+
+function initGame() {
+  board = Array.from({ length: 25 }, () => Math.floor(Math.random() * 9) + 1);
+  const gameBoard = document.getElementById('game-board');
+  gameBoard.innerHTML = '';
+  board.forEach((num, index) => {
+    const cell = document.createElement('div');
+    cell.className = 'cell';
+    cell.textContent = num;
+    cell.addEventListener('click', () => handleSelect(cell, index));
+    gameBoard.appendChild(cell);
+  });
+}
+
+function handleSelect(cell, index) {
+  if (selected.includes(index)) {
+    cell.classList.remove('selected');
+    selected = selected.filter(i => i !== index);
+    return;
+  }
+
+  cell.classList.add('selected');
+  selected.push(index);
+
+  if (selected.length === 2) {
+    const [i1, i2] = selected;
+    const n1 = board[i1];
+    const n2 = board[i2];
+    if (i1 !== i2 && (n1 === n2 || n1 + n2 === 10)) {
+      document.querySelectorAll('.cell')[i1].textContent = '';
+      document.querySelectorAll('.cell')[i2].textContent = '';
+      board[i1] = null;
+      board[i2] = null;
+    }
+    document.querySelectorAll('.cell').forEach(cell => cell.classList.remove('selected'));
+    selected = [];
+  }
+}
+
+function resetGame() {
+  initGame();
+}
+
+window.onload = initGame;
